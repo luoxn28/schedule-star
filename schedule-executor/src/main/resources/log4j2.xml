@@ -1,0 +1,28 @@
+<Configuration status="WARN" monitorInterval="30">
+    <Appenders>
+        <RollingRandomAccessFile name="COMMON" fileName="./logs/common.log"
+                                 filePattern="./logs/$${date:yyyy-MM}/common-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - %l - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingRandomAccessFile>
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <!--输出日志的格式 -->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - %l - %m%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.schedule.star" level="INFO" additivity="FALSE">
+            <AppenderRef ref="COMMON"/>
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>
