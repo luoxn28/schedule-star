@@ -1,5 +1,6 @@
 package com.test.core;
 
+import com.schedule.star.core.rpc.RpcServiceFactory;
 import com.schedule.star.core.util.IDGenerator;
 import org.junit.Test;
 
