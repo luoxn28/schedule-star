@@ -34,7 +34,7 @@ public class TestExecutorDao {
         entity.setPort(9999);
         entity.setKeepAliveTime(10);
         entity.setToken(IDGenerator.getId());
-        entity.setStatus(R.status.SUCCESS);
+        entity.setStatus(R.executorStatus.ONLINE);
 
         Assert.isTrue(executorDao.insert(entity) > 0);
     }

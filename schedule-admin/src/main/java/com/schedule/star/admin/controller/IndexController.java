@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @GetMapping
+    @GetMapping("/")
     public Object index() {
         return "<h3 style='text-align: center;'>hello " +
                 "<a href='https://github.com/luoxn28/schedule-star'>schedule-star</a> admin</h3>";

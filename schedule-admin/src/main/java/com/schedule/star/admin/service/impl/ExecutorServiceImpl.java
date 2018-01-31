@@ -64,12 +64,12 @@ public class ExecutorServiceImpl implements ExecutorService {
 
     @Override
     public int deleteExecutor(String executorId) {
-        if (1 == executorDao.updateByExecutorId(new ExecutorEntity(executorId, R.executorStatus.DELETED))) {
-            logger.info("删除执行器成功: executorId=" + executorId);
-        } else {
+        if (1 != executorDao.updateByExecutorId(new ExecutorEntity(executorId, R.executorStatus.DELETED))) {
             logger.info("删除执行器失败: executorId=" + executorId);
+            throw new RuntimeException("删除执行器失败");
         }
 
+        logger.info("删除执行器成功: executorId=" + executorId);
         return 1;
     }
 
