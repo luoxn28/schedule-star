@@ -12,4 +12,10 @@ public interface R {
         String FAIL = "FAIL";
     }
 
+    interface executorStatus {
+        String ONLINE = "ONLINE";
+        String OFFLINE = "OFFLINE";
+        String DELETED = "DELETED";
+    }
+
 }
