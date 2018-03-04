@@ -3,7 +3,7 @@
         <RollingRandomAccessFile name="COMMON" fileName="./logs/common.log"
                                  filePattern="./logs/$${date:yyyy-MM}/common-%d{yyyy-MM-dd}.log.gz">
             <PatternLayout>
-                <Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - %l - %m%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p - %l[%t] - %m%n</Pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -12,7 +12,7 @@
 
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <!--输出日志的格式 -->
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %p - %l[%t] - %m%n"/>
         </Console>
     </Appenders>
 
