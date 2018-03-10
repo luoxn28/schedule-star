@@ -18,6 +18,15 @@ public interface R {
         String DELETED = "DELETED";
     }
 
+    interface jobType {
+        String Java = "Java";
+        String Script = "Script";
+
+        // 调度参数执行的任务类型
+        String Shell = "Shell";
+        String Python = "Python";
+    }
+
     interface callback {
         String CAN_DELETE = "CAN_DELETE";
     }
@@ -27,6 +36,11 @@ public interface R {
          * 多个register url分隔符
          */
         String registerUrl = ",";
+
+        /**
+         * 多个jobId分隔符，子任务存储格式
+         */
+        String childJob = ",";
     }
 
 }

@@ -24,8 +24,9 @@ public class CallbackParam implements Serializable {
     private Date   finishTime;    // 任务执行结束时间
     private String childJobs;     // 子任务列表，可为空，以,分隔 R.partFlag.childJob
 
-    public CallbackParam(String jobId, String logId) {
+    public CallbackParam(String jobId, String jobName, String logId) {
         this.jobId = jobId;
+        this.jobName = jobName;
         this.logId = logId;
     }
 }

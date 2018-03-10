@@ -18,4 +18,13 @@ public class TriggerParam implements Serializable {
 
     private String logId;
     private String jobId;
+    private String jobName;
+
+    private String jobType;       // 任务类型(Java/Script(Shell/Python))
+    private String[] params;      // 任务参数
+
+    private String javaHandler;   // Java任务handler
+    private String scriptSource;  // Script任务源码
+
+    private String childJobs;     // 子任务列表，可为空，以,分隔 R.partFlag.childJob
 }
