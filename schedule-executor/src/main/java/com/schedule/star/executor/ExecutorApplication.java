@@ -2,7 +2,8 @@ package com.schedule.star.executor;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.setting.dialect.Props;
-import com.schedule.star.executor.config.ExecutorConfig;
+import com.schedule.star.core.executor.ExecutorStarter;
+import com.schedule.star.core.executor.ExecutorConfig;
 import com.schedule.star.executor.util.CmdLineUtil;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -12,12 +13,16 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+import javax.annotation.Resource;
 
 /**
  * @author xiangnan
  * @date 2018/1/28 15:15
  */
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.schedule.star.core"})
 public class ExecutorApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -25,6 +30,9 @@ public class ExecutorApplication implements CommandLineRunner {
     }
 
     private final Logger logger = LogManager.getLogger();
+
+    @Resource
+    private ExecutorStarter starter;
 
     @Override
     public void run(String[] args) throws Exception {
@@ -65,6 +73,7 @@ public class ExecutorApplication implements CommandLineRunner {
                 return;
             }
 
+            starter.run(config);
             logger.info("schedule-star start success");
         } catch (Throwable e) {
             e.printStackTrace();

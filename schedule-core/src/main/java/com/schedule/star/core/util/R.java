@@ -18,4 +18,15 @@ public interface R {
         String DELETED = "DELETED";
     }
 
+    interface callback {
+        String CAN_DELETE = "CAN_DELETE";
+    }
+
+    interface partFlag {
+        /**
+         * 多个register url分隔符
+         */
+        String registerUrl = ",";
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.schedule.star.executor.config;
+package com.schedule.star.core.executor;
 
 import cn.hutool.core.util.StrUtil;
 import com.schedule.star.core.util.IDGenerator;
@@ -24,6 +24,7 @@ public class ExecutorConfig {
     private String token = IDGenerator.getId();
     private int    keepAliveTime = 10;  // 执行器与调度中心保活周期
 
+    // 配置文件路径
     private String configPath;
 
     public boolean valid() {
