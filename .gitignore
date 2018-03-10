@@ -27,3 +27,4 @@ hs_err_pid*
 target
 logs
 schedule-admin/src/main/resources/application.yml
+scripts/

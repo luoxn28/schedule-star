@@ -27,6 +27,13 @@ public interface R {
         String Python = "Python";
     }
 
+    interface jobStatus {
+        String CREATED = "CREATED";
+        String RUNNING = "RUNNING";
+        String PAUSE   = "PAUSE";
+        String DELETED = "DELETED";
+    }
+
     interface callback {
         String CAN_DELETE = "CAN_DELETE";
     }

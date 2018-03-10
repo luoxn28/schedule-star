@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
  * @date 2018/2/11 21:59
  */
 @AllArgsConstructor
-public enum JobInfoEnum {
+public enum JobEnum {
 
     UNKNOWN_ERROR(-1, "UNKNOWN_ERROR", "未知错误"),
     UNKNOWN_TASK_ERROR(-1, "UNKNOWN_ERROR", "未知任务类型"),

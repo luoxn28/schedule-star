@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedule.star.admin.dao.JobDao">
+
+    <select id="selectListByType" resultType="com.schedule.star.admin.entity.JobEntity">
+        SELECT *
+        FROM `job`
+        WHERE `type` = #{type} AND `status` != 'DELETED'
+    </select>
+
+    <select id="selectByJobId" resultType="com.schedule.star.admin.entity.JobEntity">
+        SELECT *
+        FROM `job`
+        WHERE `job_id` = #{jobId} AND `status` != 'DELETED'
+    </select>
+
+    <insert id="insert">
+        INSERT INTO `job` (
+            `job_id`, `group_id`, `name`, `desc`, `type`, `cron`, `params`,
+            `router_strategy`, `fail_strategy`, `email_phone`,
+            `script_loc`, `class_name`, `param_creator`, `param_raw_value`,
+            `child_jobs`, `create_time`, `update_time`, `status`
+        ) VALUES (
+            #{jobId}, #{groupId}, #{name}, #{desc}, #{type}, #{cron}, #{params},
+            #{routerStrategy}, #{failStrategy}, #{emailPhone},
+            #{scriptLoc}, #{className}, #{paramCreator}, #{paramRawValue},
+            #{childJobs}, NOW(), NOW(), #{status}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE `job`
+        SET
+            <if test="groupId != null">`group_id` = #{groupId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="desc != null">`desc` = #{desc},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="cron != null">`cron` = #{cron},</if>
+            <if test="params != null">`params` = #{params},</if>
+            <if test="routerStrategy != null">`router_strategy` = #{routerStrategy},</if>
+            <if test="failStrategy != null">`fail_strategy` = #{failStrategy},</if>
+            <if test="emailPhone != null">`email_phone` = #{emailPhone},</if>
+            <if test="scriptLoc != null">`script_loc` = #{scriptLoc},</if>
+            <if test="className != null">`class_name` = #{className},</if>
+            <if test="paramCreator != null">`param_creator` = #{paramCreator},</if>
+            <if test="paramRawValue != null">`param_raw_value` = #{paramRawValue},</if>
+            <if test="childJobs != null">`child_jobs` = #{childJobs},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="status != null">`status` = #{status},</if>
+        `update_time` = NOW()
+        WHERE `job_id` = #{jobId}
+    </update>
+
+</mapper>

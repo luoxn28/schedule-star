@@ -45,8 +45,8 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public Result callback(CallbackParam callbackParam) {
-        System.out.println("callback还没开始写呢");
-        return null;
+        System.out.println("callback还没开始写呢 " + callbackParam);
+        return Result.success(R.callback.CAN_DELETE);
     }
 
 }
