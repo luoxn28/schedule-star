@@ -48,7 +48,7 @@ public class RegisterThread {
                         if (keepAlive) {
                             for (String keepAliveUrl : onlineKeepAliveUrlList) {
                                 Result result = HttpUtil.keepAlive(keepAliveUrl, param.getIp(), param.getPort());
-                                if (result.isSuccess()) {
+                                if (result.success()) {
                                     keepAlive = true;
                                     break;
                                 } else {
@@ -64,7 +64,7 @@ public class RegisterThread {
                                 logger.info("执行器准备注册，注册url: {}", registerUrl);
 
                                 Result result = HttpUtil.register(registerUrl, param);
-                                if (result.isSuccess()) {
+                                if (result.success()) {
                                     // 注册成功后开始心跳
                                     keepAlive = true;
 

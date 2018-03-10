@@ -54,7 +54,7 @@ public class ExecutorServiceImpl implements ExecutorService {
 
         // 在线通知执行器更改
         Result result = onlineUpdateExecutorInfo(executorDao.selectByExecutorId(bean.getExecutorId()));
-        if (!result.isSuccess()) {
+        if (!result.success()) {
             logger.warn("在线通知执行器更改失败，bean: " + result.getData());
             throw new RuntimeException("在线通知执行器更改失败 " + result.getData());
         }

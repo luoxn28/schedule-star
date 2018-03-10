@@ -23,4 +23,6 @@ public interface ExecutorDao {
 
     int updateByExecutorId(ExecutorEntity entity);
 
+    int updateByIpPort(ExecutorEntity entity);
+
 }

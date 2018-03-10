@@ -73,12 +73,12 @@ public class CallbackThread {
 
                                 logger.info("callback {}:{} to {} {}",
                                         callbackParam.getJobName(), callbackParam.getLogId(), url, result.getStatus());
-                                if (result.isSuccess() && R.callback.CAN_DELETE.equals(result.getData().toString())) {
+                                if (result.success() && R.callback.CAN_DELETE.equals(result.getData().toString())) {
                                     break;
                                 }
                             }
 
-                            if (!result.isSuccess()) {
+                            if (!result.success()) {
                                 // 发送给所有的调度中心都没有成功，那就等会再发送callback消息
                                 callBackQueue.offer(callbackParam);
                             }

@@ -26,14 +26,14 @@ public class Result <T> implements Serializable {
     public static Result<String> SUCCESS = new Result<>(R.status.SUCCESS, null);
     public static Result<String> FAIL = new Result<>(R.status.FAIL, null);
 
-    public static Result<String> success() {
-        return new Result<>(R.status.SUCCESS, null);
+    public static <T> Result success(T message) {
+        return new Result<>(R.status.SUCCESS, message);
     }
     public static <T> Result fail(T message) {
         return new Result<>(R.status.FAIL, message);
     }
 
-    public boolean isSuccess() {
+    public boolean success() {
         return StrUtil.equals(R.status.SUCCESS, status);
     }
 

@@ -42,4 +42,16 @@
         WHERE executor_id = #{executorId}
     </update>
 
+    <update id="updateByIpPort">
+        UPDATE executor
+        SET
+        <if test="name != null">name = #{name},</if>
+        <if test="token != null">token = #{token},</if>
+        <if test="status != null">status = #{status},</if>
+        <if test="keepAliveTime > 0">keep_alive_time = #{keepAliveTime},</if>
+        <if test="registerTime != null">register_time = #{registerTime},</if>
+        update_time = NOW()
+        WHERE ip = #{ip} AND port = #{port}
+    </update>
+
 </mapper>
