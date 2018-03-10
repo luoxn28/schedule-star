@@ -5,6 +5,7 @@ import com.schedule.star.core.util.IDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,27 @@ import java.util.List;
 public class ExecutorConfig {
     private String ip;
     private int    port;
-    private String registerUrls;
-
-    private String token = IDGenerator.getId();
+    private String name;                // 执行器名字
+    private String registerUrls;        // 注册地址，可能有多个，用 ',' 分隔
     private int    keepAliveTime = 10;  // 执行器与调度中心保活周期
+
+    private String token = IDGenerator.getId();  // 可用于调度中心与执行器通信的安全验证
 
     // 配置文件路径
     private String configPath;
+
+    public void printConfigItem(Logger logger) {
+        if (logger == null) {
+            return;
+        }
+
+        logger.info("执行器 ip: {}", ip);
+        logger.info("执行器 port: {}", port);
+        logger.info("执行器 name: {}", name);
+        logger.info("执行器 registerUrl: {}", registerUrls);
+        logger.info("心跳时间 keepAliveTime: {}", keepAliveTime);
+        logger.info("执行器 token: {}", token);
+    }
 
     public boolean valid() {
         try {
