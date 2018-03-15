@@ -2,6 +2,7 @@ package com.schedule.star.core.rpc.handler.impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 import com.schedule.star.core.bean.Result;
 import com.schedule.star.core.rpc.bean.TriggerParam;
 import com.schedule.star.core.rpc.handler.JobHandler;
@@ -53,7 +54,7 @@ public class ScriptJobHandler implements JobHandler {
             }
         }
 
-        Result result = Result.success(null);
+        Result<String> result = Result.success(null);
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             ByteArrayOutputStream err = new ByteArrayOutputStream();
@@ -67,8 +68,8 @@ public class ScriptJobHandler implements JobHandler {
             } else {
                 // 脚本执行失败
                 result.setStatus(R.status.FAIL);
-                result.setData("exit: " + exit + ", out: " + out.toString() +
-                        ", err: " + err.toString());
+                result.setData(StrUtil.format("exit: {}, out: {}, err: {}",
+                        exit, out.toString(), err.toString()));
             }
 
         } catch (Exception e) {
