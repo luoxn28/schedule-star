@@ -45,7 +45,6 @@ public class ExecutorEntity {
 
         ExecutorEntity entity = new ExecutorEntity();
         entity.setExecutorId(IDGenerator.getId());
-        entity.setRegisterTime(new Date());
         entity.setStatus(R.executorStatus.ONLINE);
         entity.setIp(param.getIp());
         entity.setPort(param.getPort());

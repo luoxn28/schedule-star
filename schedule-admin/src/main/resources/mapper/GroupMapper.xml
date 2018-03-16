@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedule.star.admin.dao.GroupDao">
+
+    <select id="selectList" resultType="com.schedule.star.admin.entity.GroupEntity">
+        SELECT *
+        FROM `group`
+        WHERE `status` != 'DELETED'
+        ORDER BY `id` DESC
+    </select>
+
+    <select id="selectByGroupId" resultType="com.schedule.star.admin.entity.GroupEntity">
+        SELECT *
+        FROM `group`
+        WHERE `group_id` = #{groupId} AND `status` != 'DELETED'
+    </select>
+
+    <insert id="insert">
+        INSERT INTO `group` (
+            `group_id`, `name`, `desc`,
+            `create_time`, `update_time`, `status`
+        ) VALUES (
+            #{groupId}, #{name}, #{desc},
+            NOW(), NOW(), #{status}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE `group`
+        SET
+        <if test="name != null">name = #{name},</if>
+        <if test="desc != null">`desc` = #{desc},</if>
+        <if test="createTime != null">create_time = #{createTime},</if>
+        <if test="status != null">status = #{status},</if>
+        update_time = NOW()
+        WHERE `group_id` = #{groupId}
+    </update>
+
+    <insert id="addExecutorToGroup">
+        INSERT INTO `link_group_executor` (
+            `group_id`, `executor_id`
+        ) VALUES (
+            #{groupId}, #{executorId}
+        )
+    </insert>
+
+    <select id="selectExecutorIdByGroupId" resultType="String">
+        SELECT `executor_id`
+        FROM `link_group_executor`
+        WHERE `group_id` = #{groupId}
+    </select>
+
+    <select id="selectExecutorListByGroupId" resultType="com.schedule.star.admin.entity.ExecutorEntity">
+        SELECT *
+        FROM executor INNER JOIN link_group_executor link ON executor.executor_id = link.executor_id AND executor.status = 'ONLINE'
+        WHERE link.group_id = #{groupId}
+    </select>
+
+    <select id="selectExecutorId" resultType="String">
+        SELECT executor_id
+        FROM link_group_executor
+        WHERE group_id = #{groupId} AND executor_id = #{executorId}
+    </select>
+
+    <delete id="deleteExecutorFromGroup">
+        DELETE
+        FROM link_group_executor
+        WHERE group_id = #{groupId} AND executor_id = #{executorId}
+    </delete>
+
+</mapper>

@@ -65,7 +65,32 @@ CREATE TABLE `job` (
   KEY `job_group` (`group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for group
+-- ----------------------------
+DROP TABLE IF EXISTS `group`;
+CREATE TABLE `group` (
+  `id` int(11) NOT NULL,
+  `group_id` varchar(64) NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `status` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group_id` (`group_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- ----------------------------
+-- Table structure for link_group_executor
+-- ----------------------------
+DROP TABLE IF EXISTS `link_group_executor`;
+CREATE TABLE `link_group_executor` (
+  `group_id` varchar(64) NOT NULL,
+  `executor_id` varchar(64) NOT NULL,
+  PRIMARY KEY (`group_id`),
+  KEY `group_id` (`group_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 -- ----------------------------
