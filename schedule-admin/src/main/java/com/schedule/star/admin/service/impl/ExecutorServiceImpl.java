@@ -1,8 +1,8 @@
 package com.schedule.star.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.schedule.star.admin.bean.ExecutorBean;
-import com.schedule.star.admin.bean.convert.ExecutorConvert;
 import com.schedule.star.admin.dao.ExecutorDao;
 import com.schedule.star.admin.entity.ExecutorEntity;
 import com.schedule.star.admin.service.ExecutorService;
@@ -17,7 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.schedule.star.admin.service.impl.ExecutorServiceImpl.ExecutorConvert.toBeanList;
+import static com.schedule.star.admin.service.impl.ExecutorServiceImpl.ExecutorConvert.toEntity;
 
 /**
  * @author xiangnan
@@ -32,13 +36,13 @@ public class ExecutorServiceImpl implements ExecutorService {
 
     @Override
     public List<ExecutorBean> getExecutorList() {
-        return ExecutorConvert.toBeanList(executorDao.selectList());
+        return toBeanList(executorDao.selectList());
     }
 
     @Override
     @Transactional
     public int updateExecutor(ExecutorBean bean) {
-        ExecutorEntity entity = ExecutorConvert.toEntity(bean);
+        ExecutorEntity entity = toEntity(bean);
         ExecutorEntity oldEntity = executorDao.selectByExecutorId(bean.getExecutorId());
         if ((oldEntity == null) || !StrUtil.equals(oldEntity.getStatus(), R.executorStatus.ONLINE)) {
             throw new RuntimeException("未找到执行器信息或者执行器不在线");
@@ -92,6 +96,44 @@ public class ExecutorServiceImpl implements ExecutorService {
             logger.error("在线更改执行器信息错误, e:", e);
             return Result.fail(e.getMessage());
         }
+    }
+
+    /**
+     * Bean转换类
+     */
+    static class ExecutorConvert {
+
+        static ExecutorBean toBean(ExecutorEntity entity) {
+            ExecutorBean bean = null;
+
+            if (entity != null) {
+                bean = new ExecutorBean();
+                BeanUtil.copyProperties(entity, bean);
+            }
+            return bean;
+        }
+
+        static ExecutorEntity toEntity(ExecutorBean bean) {
+            ExecutorEntity entity = null;
+
+            if (bean != null) {
+                entity = new ExecutorEntity();
+                BeanUtil.copyProperties(bean, entity);
+            }
+            return entity;
+        }
+
+        static List<ExecutorBean> toBeanList(List<ExecutorEntity> entityList) {
+            List<ExecutorBean> beanList = new ArrayList<>();
+            if (entityList != null) {
+                for (ExecutorEntity entity : entityList) {
+                    beanList.add(toBean(entity));
+                }
+            }
+
+            return beanList;
+        }
+
     }
 
 }

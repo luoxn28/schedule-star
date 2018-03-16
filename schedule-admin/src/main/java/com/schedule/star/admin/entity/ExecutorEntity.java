@@ -2,6 +2,7 @@ package com.schedule.star.admin.entity;
 
 import com.schedule.star.core.bean.RegisterParam;
 import com.schedule.star.core.util.IDGenerator;
+import com.schedule.star.core.util.R;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,8 @@ public class ExecutorEntity {
 
         ExecutorEntity entity = new ExecutorEntity();
         entity.setExecutorId(IDGenerator.getId());
+        entity.setRegisterTime(new Date());
+        entity.setStatus(R.executorStatus.ONLINE);
         entity.setIp(param.getIp());
         entity.setPort(param.getPort());
         entity.setName(param.getName());

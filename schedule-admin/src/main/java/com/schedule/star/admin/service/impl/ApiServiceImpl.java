@@ -28,10 +28,16 @@ public class ApiServiceImpl implements ApiService {
     public Result register(RegisterParam param) {
         ExecutorEntity entity = ExecutorEntity.build(param);
         if (entity == null) {
-            return null;
+            // not care
+            return Result.FAIL;
         }
 
-        return executorDao.updateByIpPort(entity) > 0 ? Result.SUCCESS : Result.FAIL;
+        ExecutorEntity oldEntity = executorDao.selectByIpPort(param.getIp(), param.getPort());
+        if (oldEntity != null) {
+            return executorDao.updateByIpPort(entity) > 0 ? Result.SUCCESS : Result.FAIL;
+        } else {
+            return executorDao.insert(entity) > 0 ? Result.SUCCESS : Result.FAIL;
+        }
     }
 
     @Override

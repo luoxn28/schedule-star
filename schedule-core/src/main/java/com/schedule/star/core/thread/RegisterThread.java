@@ -93,7 +93,7 @@ public class RegisterThread {
                         }
 
                         // 如果两个urlList大小不一致，则表示有的调度中心挂了
-                        if (onlineRegisterUrlList.size() == registerUrlList.size()) {
+                        if (keepAlive && (onlineRegisterUrlList.size() == registerUrlList.size())) {
                             TimeUnit.SECONDS.sleep(executorStarter.getKeepAliveTime());
                         } else {
                             if (onlineRegisterUrlList.isEmpty()) {
