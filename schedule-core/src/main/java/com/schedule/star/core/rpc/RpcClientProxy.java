@@ -13,6 +13,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.FactoryBean;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
@@ -31,22 +33,24 @@ public class RpcClientProxy implements FactoryBean<Object> {
     @Override
     public Object getObject() throws Exception {
 
-        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[]{clazz},
-                (proxy, method, args) -> {
-                    RpcRequest request = new RpcRequest();
-                    request.setToUrl(toUrl);
-                    request.setClazz(method.getDeclaringClass().getName());
-                    request.setMethod(method.getName());
-                    request.setParamType(method.getParameterTypes());
-                    request.setParam(args);
+        return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[]{clazz}, new InvocationHandler() {
+            @Override
+            public Object invoke(Object o, Method method, Object[] args) throws Throwable {
+                RpcRequest request = new RpcRequest();
+                request.setToUrl(toUrl);
+                request.setClazz(method.getDeclaringClass().getName());
+                request.setMethod(method.getName());
+                request.setParamType(method.getParameterTypes());
+                request.setParam(args);
 
-                    RpcResponse response =  send(request);
-                    if (response.success()) {
-                        return response.getResult();
-                    } else {
-                        throw new RuntimeException(response.getMessage());
-                    }
-                });
+                RpcResponse response =  send(request);
+                if (response.success()) {
+                    return response.getResult();
+                } else {
+                    throw new RuntimeException(response.getMessage());
+                }
+            }
+        });
 
     }
 

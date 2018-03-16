@@ -36,7 +36,9 @@ public class ExecutorConvert extends BaseConvert {
         List<ExecutorBean> beanList = new ArrayList<>();
 
         if (entityList != null) {
-            entityList.forEach(entity -> beanList.add(toBean(entity)));
+            for (ExecutorEntity entity : entityList) {
+                beanList.add(toBean(entity));
+            }
         }
 
         return beanList;

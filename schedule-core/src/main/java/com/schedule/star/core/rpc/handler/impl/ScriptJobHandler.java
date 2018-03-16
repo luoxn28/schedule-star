@@ -54,7 +54,7 @@ public class ScriptJobHandler implements JobHandler {
             }
         }
 
-        Result<String> result = Result.success(null);
+        Result result = Result.success(null);
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             ByteArrayOutputStream err = new ByteArrayOutputStream();
