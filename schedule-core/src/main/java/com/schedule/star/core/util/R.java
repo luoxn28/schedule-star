@@ -18,6 +18,11 @@ public interface R {
         String DELETED = "DELETED";
     }
 
+    interface groupStatus {
+        String CREATED = "CREATED";
+        String DELETED = "DELETED";
+    }
+
     interface jobType {
         String Java = "Java";
         String Script = "Script";
