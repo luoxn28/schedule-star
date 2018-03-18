@@ -1,5 +1,7 @@
 package com.schedule.star.core.bean;
 
+import cn.hutool.core.util.StrUtil;
+import com.schedule.star.core.util.R;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +30,9 @@ public class CallbackParam implements Serializable {
         this.jobId = jobId;
         this.jobName = jobName;
         this.logId = logId;
+    }
+
+    public boolean success() {
+        return StrUtil.equals(handleResult, R.status.SUCCESS);
     }
 }
