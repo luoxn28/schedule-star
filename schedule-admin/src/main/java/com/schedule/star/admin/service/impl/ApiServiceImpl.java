@@ -32,6 +32,9 @@ public class ApiServiceImpl implements ApiService {
             return Result.FAIL;
         }
 
+        logger.info("执行器注册成功: {}:{}", entity.getIp(), entity.getPort());
+        logger.info("执行器将开始保活: {}:{}", entity.getIp(), entity.getPort());
+
         ExecutorEntity oldEntity = executorDao.selectByIpPort(param.getIp(), param.getPort());
         if (oldEntity != null) {
             return executorDao.updateByIpPort(entity) > 0 ? Result.SUCCESS : Result.FAIL;

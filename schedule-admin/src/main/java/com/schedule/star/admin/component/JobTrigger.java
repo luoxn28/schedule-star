@@ -140,7 +140,7 @@ public class JobTrigger {
                 }
 
                 logEntity.setResult(result.getStatus());
-                logEntity.setContent(result.getData().toString());
+                logEntity.setContent(result.getData() == null ? null : result.getData().toString());
             }
 
         } while (loopTrigger);
