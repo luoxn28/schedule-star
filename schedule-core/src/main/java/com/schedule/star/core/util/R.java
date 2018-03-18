@@ -43,6 +43,23 @@ public interface R {
         String CAN_DELETE = "CAN_DELETE";
     }
 
+    /**
+     * 路由策略
+     */
+    interface routerStrategy {
+        String RANDOM = "RANDOM"; /* 随机调度 */
+        String FIRST  = "FIRST";  /* 第一个调度 */
+    }
+
+    /**
+     * 失败处理策略（trigger失败、handle失败）
+     */
+    interface failStrategy {
+        String NOCARE = "NOCARE"; // not care
+        String ALARM  = "ALARM";  // 失败告警
+        String RETRY  = "RETRY";  // 失败重试
+    }
+
     interface partFlag {
         /**
          * 多个register url分隔符
@@ -53,6 +70,16 @@ public interface R {
          * 多个jobId分隔符，子任务存储格式
          */
         String childJob = ",";
+
+        /**
+         * 多个任务参数分隔符
+         */
+        String jobParam = ",";
+
+        /**
+         * 多个email/phone分隔符
+         */
+        String emailPhone = ",";
     }
 
 }

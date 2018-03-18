@@ -28,11 +28,11 @@
     <update id="update">
         UPDATE `group`
         SET
-        <if test="name != null">name = #{name},</if>
+        <if test="name != null">`name` = #{name},</if>
         <if test="desc != null">`desc` = #{desc},</if>
-        <if test="createTime != null">create_time = #{createTime},</if>
-        <if test="status != null">status = #{status},</if>
-        update_time = NOW()
+        <if test="createTime != null">`create_time` = #{createTime},</if>
+        <if test="status != null">`status` = #{status},</if>
+        `update_time` = NOW()
         WHERE `group_id` = #{groupId}
     </update>
 

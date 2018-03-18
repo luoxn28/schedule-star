@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedule.star.admin.dao.LogDao">
+
+    <select id="selectByLogId" resultType="com.schedule.star.admin.entity.LogEntity">
+        SELECT *
+        FROM `log`
+        WHERE log_id = #{logId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO `log` (
+            `log_id`, `job_id`, `ip_port`,
+            `result`, `content`, `time`,
+            `params`,
+            `handle_result`, `handle_content`, `handle_time`, `finish_time`
+        ) VALUES (
+            #{logId}, #{jobId}, #{ipPort},
+            #{result}, #{content}, #{time},
+            #{params},
+            #{handleResult}, #{handleContent}, #{handleTime}, #{finishTime}
+        )
+    </insert>
+
+    <update id="updateTriggerInfo">
+        UPDATE `log`
+        SET
+        `result` = #{result},
+        `content` = #{content},
+        `ip_port` = #{ipPort}
+        WHERE `log_id` = #{logId}
+    </update>
+
+    <update id="updateHandleInfo">
+        UPDATE `log`
+        SET
+        `handle_result` = #{handleResult},
+        `handle_content` = #{handleContent},
+        `handle_time` = #{handleTime},
+        `finish_time` = #{finishTime}
+        WHERE `log_id` = #{logId}
+    </update>
+
+    <delete id="deleteByLogId">
+        DELETE FROM job_log
+        WHERE log_id = #{logId}
+    </delete>
+
+</mapper>
